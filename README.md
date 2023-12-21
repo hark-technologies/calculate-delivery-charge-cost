@@ -1,8 +1,9 @@
-# Use Nettleie-API and Elhub data to compute the Nettleie invoice data
+# Use delivery charge API and Elhub data to compute grid cost invoice data
 
-We are going to use the Hark API to fetch DSO models with pricing info, and apply this to consumption data downloaded from Elhub.
+This is an example of how we can use the Hark API to fetch DSO models with pricing info, and apply this to consumption data downloaded from Elhub.
 
-To set up the Python project, we start by creating a virtual environment and install necessary packages. We need a few external packages to use Graphql and convert returned data to Python types.
+To set up the Python project, we start by creating a virtual environment and install necessary packages.
+We need a few external packages to use Graphql and convert returned data to Python types.
 
 ```sh
 python3 -m venv .venv
