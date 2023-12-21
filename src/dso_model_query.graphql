@@ -1,0 +1,1064 @@
+query deliveryChargeModelExample($id: DeliveryChargeModelId!, $date: Date) {
+  deliveryChargeModel(input: { id: $id, date: $date }) {
+    id
+    gln
+    validFrom
+    timezone
+    capacityModel {
+      ... on MonthlyPeaksAtDifferentDays {
+        __typename
+        peaksPerMonth
+        priceAboveCapacitySteps {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+        capacitySteps {
+          rangeInWh {
+            from
+            to
+          }
+          capacityStepPrice {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+      }
+      ... on WeightedYearlyRollingPeaksInDifferentWeeks {
+        __typename
+        baseFeePerYear {
+          price
+          priceCurrency
+          priceExcludingVat
+          vat
+        }
+        monthWeights {
+          january
+          february
+          march
+          april
+          may
+          june
+          july
+          august
+          september
+          october
+          november
+          december
+        }
+        pricePerKwhForAverageOfPeaks {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+        weekPeaksPerYear
+      }
+      ... on MonthlyPeaksAtDifferentDaysLinearWithBase {
+        __typename
+        baseFeePerYear {
+          price
+          priceCurrency
+          priceExcludingVat
+          vat
+        }
+        peaksPerMonth
+        pricePerKwhForAverageOfPeaks {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
+      ... on FuseAndVoltageSize {
+        __typename
+        onePhasePrices {
+          voltage230 {
+            currentRangePrices {
+              fromCurrent
+              toCurrent
+              yearlyPrice {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+            }
+            yearlyPriceAboveCurrentRanges {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+          voltage400 {
+            currentRangePrices {
+              fromCurrent
+              toCurrent
+              yearlyPrice {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+            }
+            yearlyPriceAboveCurrentRanges {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+        }
+        threePhasePrices {
+          voltage230 {
+            currentRangePrices {
+              fromCurrent
+              toCurrent
+              yearlyPrice {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+            }
+            yearlyPriceAboveCurrentRanges {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+          voltage400 {
+            currentRangePrices {
+              fromCurrent
+              toCurrent
+              yearlyPrice {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+            }
+            yearlyPriceAboveCurrentRanges {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+        }
+      }
+    }
+    energyModel {
+      ... on ConstantPrice {
+        __typename
+        pricesAndTaxes {
+          priceIncludingEnergyTaxes {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+          priceExcludingEnergyTaxes {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+          taxes {
+            electricalPowerTax {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+            energyFund {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+        }
+      }
+      ... on DifferentPricesDayAndNight {
+        __typename
+        prices {
+          day {
+            hours {
+              from
+              until
+            }
+            pricesAndTaxes {
+              priceIncludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              priceExcludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              taxes {
+                electricalPowerTax {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                energyFund {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+              }
+            }
+          }
+          night {
+            hours {
+              from
+              until
+            }
+            pricesAndTaxes {
+              priceIncludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              priceExcludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              taxes {
+                electricalPowerTax {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                energyFund {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+              }
+            }
+          }
+        }
+        weekendPricesFollowNightPrices
+        holidayPricesFollowNightPrices
+      }
+      ... on DifferentPricesSeasonalDayAndNight {
+        __typename
+        weekendPricesFollowNightPrices
+        holidayPricesFollowNightPrices
+        seasons {
+          summer {
+            months {
+              from
+              until
+            }
+            prices {
+              day {
+                hours {
+                  from
+                  until
+                }
+                pricesAndTaxes {
+                  priceIncludingEnergyTaxes {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  priceExcludingEnergyTaxes {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  taxes {
+                    electricalPowerTax {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                    energyFund {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                  }
+                }
+              }
+              night {
+                hours {
+                  from
+                  until
+                }
+                pricesAndTaxes {
+                  priceIncludingEnergyTaxes {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  priceExcludingEnergyTaxes {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  taxes {
+                    electricalPowerTax {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                    energyFund {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      ... on DifferentPricesSeasonal {
+        __typename
+        seasons {
+          summer {
+            months {
+              from
+              until
+            }
+            pricesAndTaxes {
+              priceIncludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              priceExcludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              taxes {
+                electricalPowerTax {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                energyFund {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+              }
+            }
+          }
+        }
+      }
+      ... on SelectableEnergyModel {
+        differentPricesSeasonal {
+          seasons {
+            summer {
+              months {
+                from
+                until
+              }
+              pricesAndTaxes {
+                priceIncludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                priceExcludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                taxes {
+                  electricalPowerTax {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  energyFund {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                }
+              }
+            }
+          }
+        }
+        differentPricesSeasonalDayAndNight {
+          __typename
+          weekendPricesFollowNightPrices
+          holidayPricesFollowNightPrices
+          seasons {
+            summer {
+              months {
+                from
+                until
+              }
+              prices {
+                day {
+                  hours {
+                    from
+                    until
+                  }
+                  pricesAndTaxes {
+                    priceIncludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                    priceExcludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                    taxes {
+                      electricalPowerTax {
+                        price
+                        priceCurrency
+                        vat
+                        priceExcludingVat
+                      }
+                      energyFund {
+                        price
+                        priceCurrency
+                        vat
+                        priceExcludingVat
+                      }
+                    }
+                  }
+                }
+                night {
+                  hours {
+                    from
+                    until
+                  }
+                  pricesAndTaxes {
+                    priceIncludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                    priceExcludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      vat
+                      priceExcludingVat
+                    }
+                    taxes {
+                      electricalPowerTax {
+                        price
+                        priceCurrency
+                        vat
+                        priceExcludingVat
+                      }
+                      energyFund {
+                        price
+                        priceCurrency
+                        vat
+                        priceExcludingVat
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        differentPricesDayAndNight {
+          __typename
+          prices {
+            day {
+              hours {
+                from
+                until
+              }
+              pricesAndTaxes {
+                priceIncludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                priceExcludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                taxes {
+                  electricalPowerTax {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  energyFund {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                }
+              }
+            }
+            night {
+              hours {
+                from
+                until
+              }
+              pricesAndTaxes {
+                priceIncludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                priceExcludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                taxes {
+                  electricalPowerTax {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  energyFund {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                }
+              }
+            }
+          }
+          weekendPricesFollowNightPrices
+          holidayPricesFollowNightPrices
+        }
+        constantPrice {
+          __typename
+          pricesAndTaxes {
+            priceIncludingEnergyTaxes {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+            priceExcludingEnergyTaxes {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+            taxes {
+              electricalPowerTax {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              energyFund {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+            }
+          }
+        }
+      }
+      ... on FuseBasedSelectable {
+        __typename
+        type
+        onePhasePrices {
+          voltage230 {
+            currentRangesWithSelectable {
+              fromCurrent
+              toCurrent
+              selectableEnergyModel {
+                constantPrice {
+                  pricesAndTaxes {
+                    priceExcludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    priceIncludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    taxes {
+                      electricalPowerTax {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                      energyFund {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                    }
+                  }
+                }
+                differentPricesSeasonal {
+                  seasons {
+                    summer {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                    winter {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          voltage400 {
+            currentRangesWithSelectable {
+              fromCurrent
+              toCurrent
+              selectableEnergyModel {
+                constantPrice {
+                  pricesAndTaxes {
+                    priceExcludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    priceIncludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    taxes {
+                      electricalPowerTax {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                      energyFund {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                    }
+                  }
+                }
+                differentPricesSeasonal {
+                  seasons {
+                    summer {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                    winter {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        threePhasePrices {
+          voltage230 {
+            currentRangesWithSelectable {
+              fromCurrent
+              toCurrent
+              selectableEnergyModel {
+                constantPrice {
+                  pricesAndTaxes {
+                    priceExcludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    priceIncludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    taxes {
+                      electricalPowerTax {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                      energyFund {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                    }
+                  }
+                }
+                differentPricesSeasonal {
+                  seasons {
+                    summer {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                    winter {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          voltage400 {
+            currentRangesWithSelectable {
+              fromCurrent
+              toCurrent
+              selectableEnergyModel {
+                constantPrice {
+                  pricesAndTaxes {
+                    priceExcludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    priceIncludingEnergyTaxes {
+                      price
+                      priceCurrency
+                      priceExcludingVat
+                      vat
+                    }
+                    taxes {
+                      electricalPowerTax {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                      energyFund {
+                        price
+                        priceCurrency
+                        priceExcludingVat
+                        vat
+                      }
+                    }
+                  }
+                }
+                differentPricesSeasonal {
+                  seasons {
+                    summer {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                    winter {
+                      months {
+                        from
+                        until
+                      }
+                      pricesAndTaxes {
+                        priceExcludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        priceIncludingEnergyTaxes {
+                          price
+                          priceCurrency
+                          priceExcludingVat
+                          vat
+                        }
+                        taxes {
+                          electricalPowerTax {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                          energyFund {
+                            price
+                            priceCurrency
+                            priceExcludingVat
+                            vat
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
