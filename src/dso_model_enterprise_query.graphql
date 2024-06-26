@@ -1,0 +1,299 @@
+query deliveryChargeModelEnterpriseExample($id: DeliveryChargeModelId!) {
+  deliveryChargeModelEnterprise(input: {id: $id}) {
+    id
+    gln
+    validFrom
+    timezone
+    fixedFeeModel {
+      ... on PerMonthFixedFee {
+        pricePerMonth {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+        yearlyEnergyFund {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
+      ... on PerYearDividedByDaysFixedFee {
+        pricePerYear {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+        yearlyEnergyFund {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
+    }
+    demandTariffModel {
+      ... on ConstantPriceDemandTariff {
+        pricePerKw {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
+      ... on ConstantPriceWeightedDemandTariff {
+        pricePerKw {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+        monthWeights {
+          january
+          february
+          march
+          april
+          may
+          june
+          july
+          august
+          september
+          october
+          november
+          december
+        }
+      }
+      ... on SeasonalPricesDemandTariff {
+        peaksPerMonth
+        highDemandHoursForWorkDays {
+          from
+          until
+        }
+        summer {
+          months {
+            from
+            until
+          }
+          pricePerKw {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+        winter {
+          months {
+            from
+            until
+          }
+          pricePerKw {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+      }
+      ... on TieredDemandTariff {
+        peaksPerMonth
+        highDemandHoursForWorkDays {
+          from
+          until
+        }
+        demandTariffTiers {
+          powerRangeInKw {
+            from
+            until
+          }
+          pricePerKw {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+        priceAboveDemandTariffTiers {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
+      ... on SeasonalTieredDemandTariff {
+        peaksPerMonth
+        highDemandHoursForWorkDays {
+          from
+          until
+        }
+        summer {
+          demandTariffTiers {
+            powerRangeInKw {
+              from
+              until
+            }
+            pricePerKw {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+          priceAboveDemandTariffTiers {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+        winter {
+          demandTariffTiers {
+            powerRangeInKw {
+              from
+              until
+            }
+            pricePerKw {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+          priceAboveDemandTariffTiers {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+      }
+    }
+    energyModel {
+      ... on ConstantPriceBusiness {
+        __typename
+        pricesAndTaxes {
+          priceIncludingEnergyTaxes {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+          priceExcludingEnergyTaxes {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+          taxes {
+            electricalPowerTax {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+        }
+      }
+      ... on DifferentPricesDayAndNightBusiness {
+        __typename
+        prices {
+          day {
+            hours {
+              from
+              until
+            }
+            pricesAndTaxes {
+              priceIncludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              priceExcludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              taxes {
+                electricalPowerTax {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+              }
+            }
+          }
+          night {
+            hours {
+              from
+              until
+            }
+            pricesAndTaxes {
+              priceIncludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              priceExcludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              taxes {
+                electricalPowerTax {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+              }
+            }
+          }
+        }
+        weekendPricesFollowNightPrices
+        holidayPricesFollowNightPrices
+      }
+      ... on DifferentPricesSeasonalBusiness {
+        __typename
+        seasons {
+          summer {
+            months {
+              from
+              until
+            }
+            pricesAndTaxes {
+              priceIncludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              priceExcludingEnergyTaxes {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              taxes {
+                electricalPowerTax {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
