@@ -152,6 +152,90 @@ query deliveryChargeModelExample($id: DeliveryChargeModelId!, $date: Date) {
           }
         }
       }
+      ... on FuseAndHomeType {
+        type
+        apartments {
+          currentRangePrices {
+            fromCurrent
+            toCurrent
+            yearlyPrice {
+              price
+              priceCurrency
+              priceExcludingVat
+              vat
+            }
+          }
+          yearlyPriceAboveCurrentRanges {
+            price
+            priceCurrency
+            priceExcludingVat
+            vat
+          }
+        }
+        houses {
+          currentRangePrices {
+            fromCurrent
+            toCurrent
+            yearlyPrice {
+              price
+              priceCurrency
+              priceExcludingVat
+              vat
+            }
+          }
+          yearlyPriceAboveCurrentRanges {
+            price
+            priceCurrency
+            priceExcludingVat
+            vat
+          }
+        }
+        yearlyEnergyFund {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
+      ... on FuseAndHomeBasedSelectableSeasonal {
+        type
+        apartments {
+          monthlyPrice {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+        }
+        houses {
+          regular {
+            fromCurrent
+            toCurrent
+            monthlyPrice {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+          seasonal {
+            fromCurrent
+            toCurrent
+            monthlyPrice {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+        }
+        yearlyEnergyFund {
+          price
+          priceCurrency
+          vat
+          priceExcludingVat
+        }
+      }
     }
     energyModel {
       ... on ConstantPrice {
@@ -1052,6 +1136,141 @@ query deliveryChargeModelExample($id: DeliveryChargeModelId!, $date: Date) {
                         }
                       }
                     }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      ... on HomeBasedSelectableSeasonal {
+        type
+        apartments {
+          priceIncludingEnergyTaxes {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+          priceExcludingEnergyTaxes {
+            price
+            priceCurrency
+            vat
+            priceExcludingVat
+          }
+          taxes {
+            electricalPowerTax {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+            energyFund {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+          }
+        }
+        houses {
+          regular {
+            priceIncludingEnergyTaxes {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+            priceExcludingEnergyTaxes {
+              price
+              priceCurrency
+              vat
+              priceExcludingVat
+            }
+            taxes {
+              electricalPowerTax {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+              energyFund {
+                price
+                priceCurrency
+                vat
+                priceExcludingVat
+              }
+            }
+          }
+          seasonal {
+            highDemandHoursForWorkDays {
+              from
+              until
+            }
+            highDemand {
+              months {
+                from
+                until
+              }
+              pricesAndTaxes {
+                priceIncludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                priceExcludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                taxes {
+                  electricalPowerTax {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  energyFund {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                }
+              }
+            }
+            lowDemand {
+              months {
+                from
+                until
+              }
+              pricesAndTaxes {
+                priceIncludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                priceExcludingEnergyTaxes {
+                  price
+                  priceCurrency
+                  vat
+                  priceExcludingVat
+                }
+                taxes {
+                  electricalPowerTax {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
+                  }
+                  energyFund {
+                    price
+                    priceCurrency
+                    vat
+                    priceExcludingVat
                   }
                 }
               }
